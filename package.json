@@ -10,6 +10,13 @@
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
-    "@red-cup-engineering/eavt-services-section": "workspace:*"
-  }
+    "@red-cup-engineering/eavt-services-section": "0.10.4"
+  },
+  "private": false,
+  "files": [
+    "package.json",
+    "README*",
+    "LICENSE*",
+    "src"
+  ]
 }
