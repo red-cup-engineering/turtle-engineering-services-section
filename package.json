@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/turtle-services-section",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Proof-path section for Turtle RDF serialization.",
   "exports": {
@@ -10,7 +10,7 @@
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
-    "@red-cup-engineering/eavt-services-section": "0.10.4"
+    "@red-cup-engineering/eavt-services-section": "0.11.0"
   },
   "private": false,
   "files": [
