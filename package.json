@@ -3,6 +3,11 @@
   "version": "0.1.2",
   "type": "module",
   "description": "Proof-path section for Turtle RDF serialization.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/computer-triplet-serialized-content-engineering-services-section.git",
+    "directory": "services/turtle-services-section"
+  },
   "exports": {
     "./turtle": "./src/turtle.mjs"
   },
