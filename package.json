@@ -1,11 +1,11 @@
 {
-  "name": "@red-cup-engineering/turtle-services-section",
+  "name": "@red-cup-engineering/turtle-engineering-services-section",
   "version": "0.1.2",
   "type": "module",
   "description": "Proof-path section for Turtle RDF serialization.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/red-cup-engineering/turtle-services-section.git"
+    "url": "git+https://github.com/red-cup-engineering/turtle-engineering-services-section.git"
   },
   "exports": {
     "./turtle": "./src/turtle.mjs"
