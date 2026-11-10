@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/turtle-services-section",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "description": "Proof-path section for Turtle RDF serialization.",
   "repository": {
