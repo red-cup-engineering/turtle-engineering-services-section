@@ -8,27 +8,21 @@
  * downstream needs. `writeTurtle`/`parseTurtle` are the document codec proper:
  * the normal form they commit to is one statement per line —
  * `<s> <p> <o-or-literal> .` — a legal subset of both Turtle and N-Triples.
- * `writeTurtle` proves every admitted {@link Triple} round-trips through
- * `parseTurtle` back to itself; `parseTurtle` rejects any line outside that
- * exact grammar rather than guessing at a richer one.
+ * This scalar projection interprets local identifiers under the supplied
+ * base. Use the Turtle source codec for RDF terms and the full document.
  */
-import { assertTriple } from "@red-cup-engineering/eavt-services-section/triple";
+import { assertTriple } from "@red-cup-engineering/eavt-engineering-services-section/triple";
 
 /** Write an IRI as a Turtle IRIREF `<...>`. */
 export function iriRef(iri) {
-  return `<${String(iri).replace(/[- <>"{}|^`\\]/g, encodeURIComponent)}>`;
+  return `<${String(iri).replace(/[\u0000-\u0020<>"{}|^`\\]/gu, encodeURIComponent)}>`;
 }
 
 /** Write a value as a Turtle literal. */
 export function turtleLiteral(value) {
-  if (typeof value === "number" && Number.isFinite(value)) return String(value);
+  if (typeof value === "number" && Number.isFinite(value)) return Object.is(value, -0) ? "-0.0" : String(value);
   if (typeof value === "boolean") return value ? "true" : "false";
-  const escaped = String(value ?? "")
-    .replace(/\\/g, "\\\\")
-    .replace(/"/g, '\\"')
-    .replace(/\n/g, "\\n")
-    .replace(/\r/g, "\\r");
-  return `"${escaped}"`;
+  return JSON.stringify(String(value ?? ""));
 }
 
 function ensureSlash(base) {
@@ -120,28 +114,22 @@ function stripPrefix(prefix, iri) {
 function parseSubject(text, base) {
   const iri = text.match(IRI_TERM);
   if (!iri) throw new TypeError(`turtle: subject term is not a member of this codec's normal form (must be an IRI): ${text}`);
-  return stripPrefix(ensureSlash(base), decodeURIComponent(iri[1]));
+  return stripPrefix(ensureSlash(base), iri[1]);
 }
 
 function parsePredicate(text, base) {
   const iri = text.match(IRI_TERM);
   if (!iri) throw new TypeError(`turtle: predicate term is not a member of this codec's normal form (must be an IRI): ${text}`);
-  return stripPrefix(predicateNamespace(base), decodeURIComponent(iri[1]));
+  return stripPrefix(predicateNamespace(base), iri[1]);
 }
 
 function parseObject(text, base) {
   const iri = text.match(IRI_TERM);
-  if (iri) return stripPrefix(ensureSlash(base), decodeURIComponent(iri[1]));
+  if (iri) return stripPrefix(ensureSlash(base), iri[1]);
   const literal = text.match(STRING_TERM);
-  if (literal) {
-    return literal[1]
-      .replace(/\\n/g, "\n")
-      .replace(/\\r/g, "\r")
-      .replace(/\\"/g, '"')
-      .replace(/\\\\/g, "\\");
-  }
+  if (literal) return JSON.parse(text);
   if (text === "true" || text === "false") return text === "true";
-  if (/^-?\d+(\.\d+)?$/.test(text)) return Number(text);
+  if (/^-?\d+(\.\d+)?(?:e[+-]?\d+)?$/iu.test(text) && Number.isFinite(Number(text))) return Number(text);
   throw new TypeError(`turtle: object term is not a member of this codec's normal form: ${text}`);
 }
 
