@@ -1,5 +1,5 @@
 {
-  "name": "@red-cup-engineering/turtle-services-section",
+  "name": "@red-cup-engineering/turtle-engineering-services-section",
   "version": "0.2.0",
   "type": "module",
   "description": "Proof-path section for Turtle RDF serialization.",
