@@ -96,9 +96,9 @@ function objectTerm(base, value, subjects) {
  */
 export function writeTurtle(triples, opts = {}) {
   const base = opts.base ?? "/";
-  const validated = triples.map((value) => assertScalarTriple(value));
-  const subjects = new Set(validated.map((triple) => String(triple.s)));
-  const lines = validated.map((triple) =>
+  const admitted = triples.map((value) => assertScalarTriple(value));
+  const subjects = new Set(admitted.map((triple) => String(triple.s)));
+  const lines = admitted.map((triple) =>
     `${subjectTerm(base, triple.s)} ${predicateTerm(base, triple.p)} ${objectTerm(base, triple.o, subjects)} .`);
   return lines.length === 0 ? "" : `${lines.join("\n")}\n`;
 }
