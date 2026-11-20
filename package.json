@@ -14,15 +14,15 @@
   "dependencies": {
     "@red-cup-engineering/datom-engineering-services-section": "^0.1.4",
     "n3": "2.13.12",
-    "@red-cup-engineering/signcell": "^0.17.5",
-    "@red-cup-engineering/typed-content": "0.1.0-dev.0"
+    "@red-cup-engineering/typed-content": "0.1.0-dev.0 || 0.1.0 || 0.1.1-dev.0"
   },
   "private": false,
   "files": [
     "package.json",
     "README*",
     "LICENSE*",
-    "src"
+    "src",
+    "test/game-data.test.mjs"
   ],
   "license": "MIT",
   "funding": {
