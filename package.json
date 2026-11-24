@@ -1,0 +1,35 @@
+{
+  "name": "@red-cup-engineering/turtle-engineering-services-section",
+  "version": "0.2.4-dev.0",
+  "type": "module",
+  "description": "Proof-path section for Turtle RDF serialization.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/turtle-engineering-services-section.git"
+  },
+  "exports": {
+    "./turtle": "./src/turtle.mjs",
+    "./source-codec": "./src/source-codec.mjs"
+  },
+  "dependencies": {
+    "@red-cup-engineering/datom-engineering-services-section": "^0.1.4",
+    "n3": "2.13.12",
+    "@red-cup-engineering/typed-content": "0.1.0-dev.0 || 0.1.0 || 0.1.1-dev.0"
+  },
+  "private": false,
+  "files": [
+    "package.json",
+    "README*",
+    "LICENSE*",
+    "src",
+    "test/game-data.test.mjs"
+  ],
+  "license": "MIT",
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/561-group/.github/blob/main/TIPS.md"
+  },
+  "engines": {
+    "node": ">=24.2.0"
+  }
+}
